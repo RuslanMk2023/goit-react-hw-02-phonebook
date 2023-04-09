@@ -26,7 +26,7 @@ export class App extends Component {
     return (
       <div className={styles.mainWrapper}>
         <h1> Phonebook: </h1>
-        <ContactForm addNewContact={this.addNewContact} />
+        <ContactForm addNewContact={this.addNewContact} contacts={contacts} />
         <h2> Contacts </h2>
         <Filter filter={filter} setFilter={this.setFilter} />
         <ContactList contacts={contacts} filter={filter} />

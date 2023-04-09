@@ -12,7 +12,7 @@ export class ContactList extends Component {
           {contacts.length > 0 &&
             contacts.map(contact => {
               const { id, name, number } = contact;
-              const isFoundByFilter = name  .toLocaleLowerCase().includes(filter.toLocaleLowerCase());
+              const isFoundByFilter = name.toLocaleLowerCase().includes(filter.toLocaleLowerCase());
               const isShowContact = filter.length === 0 || isFoundByFilter;
 
               return isShowContact && <li key={id}>{`${name}  ${number}`}</li>;

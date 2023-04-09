@@ -15,14 +15,15 @@ export class ContactForm extends Component {
   onSubmitHandler = evt => {
     evt.preventDefault();
     const { name, number } = this.state;
+    const { contacts, addNewContact } = this.props;
+    const isExistingContact = contacts.some(contact => contact.name === name);
 
-    this.props.addNewContact({
-      id: nanoid(),
-      name: name,
-      number: number,
-    });
-
-    this.setState({ name: '', number: '' });
+    if (isExistingContact) {
+      alert(`${name} is already in contacts`);
+    } else {
+      addNewContact({ id: nanoid(), name, number });
+      this.setState({ name: '', number: '' });
+    }
   };
 
   render() {
