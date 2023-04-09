@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './Filter.module.css';
 
@@ -9,7 +10,6 @@ export class Filter extends Component {
     return (
       <div className={styles.filterWrapper}>
         <label htmlFor="find-input">Find contacts by name:</label>
-
         <input
           type="text"
           name="find"
@@ -21,3 +21,8 @@ export class Filter extends Component {
     );
   }
 }
+
+Filter.propTypes = {
+  setFilter: PropTypes.func.isRequired,
+  filter: PropTypes.string.isRequired,
+};

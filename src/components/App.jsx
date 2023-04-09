@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import { ContactForm, Filter, ContactList } from 'components';
 
@@ -20,6 +21,11 @@ export class App extends Component {
   addNewContact = newContactObj =>
     this.setState({ contacts: [...this.state.contacts, newContactObj] });
 
+  deleteContact = id =>
+    this.setState({
+      contacts: this.state.contacts.filter(contact => contact.id !== id),
+    });
+
   render() {
     const { contacts, filter } = this.state;
 
@@ -27,9 +33,16 @@ export class App extends Component {
       <div className={styles.mainWrapper}>
         <h1> Phonebook: </h1>
         <ContactForm addNewContact={this.addNewContact} contacts={contacts} />
+
         <h2> Contacts </h2>
-        <Filter filter={filter} setFilter={this.setFilter} />
-        <ContactList contacts={contacts} filter={filter} />
+        <div className={styles.contentWrepper}>
+          <Filter filter={filter} setFilter={this.setFilter} />
+          <ContactList
+            deleteContact={this.deleteContact}
+            filter={filter}
+            contacts={contacts}
+          />
+        </div>
       </div>
     );
   }

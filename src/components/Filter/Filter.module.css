@@ -1,15 +1,13 @@
 .filterWrapper {
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
   flex-direction: column;
 }
 
-label {
+.filterWrapper label {
   padding: 10px 0 5px 0;
 }
 
-input {
+.filterWrapper input {
   width: 200px;
   padding: 10px;
   margin: 5px 0;
