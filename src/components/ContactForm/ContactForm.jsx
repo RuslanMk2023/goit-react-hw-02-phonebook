@@ -15,8 +15,7 @@ export class ContactForm extends Component {
 
   onSubmitHandler = evt => {
     evt.preventDefault();
-    const { name, number } = this.state;
-    const { contacts, addNewContact } = this.props;
+    const { state: { name, number }, props: { contacts, addNewContact } } = this;
     const isExistingContact = contacts.some(contact => contact.name === name);
 
     if (isExistingContact) {
