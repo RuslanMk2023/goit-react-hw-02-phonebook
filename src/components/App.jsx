@@ -12,10 +12,10 @@ export class App extends Component {
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
-    filter: '',
+    filterValue: '',
   };
 
-  setFilter = evn => this.setState({ filter: evn.target.value });
+  setFilterValue = evn => this.setState({ filterValue: evn.target.value });
 
   addNewContact = newContactObj =>
     this.setState({ contacts: [...this.state.contacts, newContactObj] });
@@ -25,8 +25,18 @@ export class App extends Component {
       contacts: this.state.contacts.filter(contact => contact.id !== id),
     });
 
+  getContactsForShow = () => {
+    const { contacts, filterValue } = this.state;
+
+    if (filterValue === '') return contacts;
+
+    return contacts.filter(({ name }) =>
+      name.toLowerCase().includes(filterValue.trim().toLowerCase())
+    );
+  };
+
   render() {
-    const { contacts, filter } = this.state;
+    const { contacts, filterValue } = this.state;
 
     return (
       <div className={styles.mainWrapper}>
@@ -35,11 +45,13 @@ export class App extends Component {
 
         <h2> Contacts </h2>
         <div className={styles.contentWrepper}>
-          <Filter filter={filter} setFilter={this.setFilter} />
+          <Filter
+            filterValue={filterValue}
+            setFilterValue={this.setFilterValue}
+          />
           <ContactList
             deleteContact={this.deleteContact}
-            filter={filter}
-            contacts={contacts}
+            contacts={this.getContactsForShow()}
           />
         </div>
       </div>
